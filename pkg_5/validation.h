@@ -1,4 +1,4 @@
-#define PORT 2020
+#define PORT 2021
 int reg_usr_validation(char *);
 void validate_buffer(char *);
 void command_validation(char *);

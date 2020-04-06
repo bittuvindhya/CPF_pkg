@@ -6,7 +6,7 @@
 #include<fcntl.h>
 #include<errno.h>
 #include"cpfapi.h"
-#define  SVC_LIST_DB	"/home/mubin/project/original/service_reg_table.csv"
+#define  SVC_LIST_DB	"/home/vindhya/pkg_5/service_reg_table.csv"
 
 typedef enum {
 	SVC_SID=0,

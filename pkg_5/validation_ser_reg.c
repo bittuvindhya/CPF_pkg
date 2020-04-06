@@ -83,7 +83,7 @@ int main_validation(char *cBuffer,int uid){
 
 			else if(strncmp(command,"GET_SVC_LIST",12)==0) {
 					if (l == 12){
-						printf("hiii");
+						//printf("hiii");
 						if(count_comma == 1){
 						
 							if(reg_user==1)
@@ -108,8 +108,10 @@ int main_validation(char *cBuffer,int uid){
 					if(count_comma == 1){
 						if(reg_user==1)
 							return subscribe_validation(cBuffer,uid);
-						else
+						else{
 							printf("\n First you need to register,enter REG_USR command\n");
+                                                        return 0;
+                                                }              
 					}else{
 						printf("\n Please enter registered UID and service id\n");
 						return 0;
