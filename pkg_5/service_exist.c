@@ -4,7 +4,7 @@
 #include "cpfapi.h"
 #include<fcntl.h>
 
-#define  SVC_LIST_DB    "/home/vindhya/pkg_4444/service_reg_table.csv"
+#define  SVC_LIST_DB    "/home/vindhya/pkg_5/service_reg_table.csv"
 
 struct get_list list[100];
 

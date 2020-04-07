@@ -77,7 +77,7 @@ int  svc_list_validate_buffer(char *cBuffer,int uid){
                         }
                 }
 		else{
-                        printf("\n Please enter service status\n");
+                        printf("\n Please enter category \n");
                 }
 
 

@@ -124,7 +124,8 @@ char *svc_provider(char *cBuffer,char *session_id){
                         }
 
                         printf("Finding symbol SVC_PROVIDER : (reg)\n");
-                        svc[i].getuid=dlsym(svc[i].pHandle,"getuid");
+			if((svc[i].getuid =dlsym(svc[i].pHandle,"getuid")) != NULL){
+                        //svc[i].getuid=dlsym(svc[i].pHandle,"getuid");
 			uid=svc[i].getuid();
 			printf("SVC_PRO uid => %s\n",uid);
 			printf("SVC_PRO cUid => %s\n",cUid);
@@ -137,6 +138,8 @@ char *svc_provider(char *cBuffer,char *session_id){
 			
 			else
 				printf("INFO : UID not matched\n");
+			}
+
 			handle[j++] = svc[i].pHandle;
        		 }
 	}

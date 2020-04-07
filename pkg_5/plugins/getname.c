@@ -6,7 +6,7 @@ char* getname(){
 	char *str=(char*)malloc(15*sizeof(char));
 	memset(str,0,sizeof(str));
 	strcpy(str,"Json");
-	printf("\ngetname");
+	//printf("\ngetname");
 	return str;
 }
 

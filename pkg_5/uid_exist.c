@@ -16,19 +16,19 @@ int uid_exist(char *cBuffer){
 	printf("\n entered in uid_exist");
 	printf("n after strchr=%s",str);
 	int fd = open(UID_LIST_DB, O_CREAT|O_RDWR|O_APPEND);
-        	int bytes_read = 0;
+        int bytes_read = 0;
 	int rec_index=0;
 
 	while((bytes_read = read(fd, (void *)&ulist[rec_index], sizeof(struct uid_list))) != 0){
                         rec_index++;
         }
 
-	/*for(i=0;i<rec_index;i++){
+/*for(i=0;i<rec_index;i++){
                         fprintf(stderr,"INFO: UID DATA (%d)\n",i);
                         fprintf(stderr,"      -----> UID    : (%s)\n",ulist[i].iUid);
                         fprintf(stderr,"      -----> NAME: (%s)\n",ulist[i].name);
                         fprintf(stderr,"      -----> MAILID   : (%s)\n",ulist[i].mailid);
-  	}*/
+  }*/
 	for(i=0;i<rec_index;i++){
 		if(strcmp(str,ulist[i].mailid) == 0){
 			printf("\n matched mail id =%s",ulist[i].mailid);
@@ -43,5 +43,3 @@ if(rec_index > 0)
 else
 return ++uid;*/
 }
-
-

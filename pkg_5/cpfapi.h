@@ -21,7 +21,7 @@ struct uid_list{
 struct subscribe{
 	char iUid[5];
 	char iSid[5];
-//	char iSubid[5];
+	//char iSubid[5];
 };
 	
 struct service{

@@ -124,15 +124,15 @@ char* get_svc_list(char *cBuffer){
 		return(cBuffer1);
 	} 
 	else if(strncmp(cCategory,"all",3) == 0){
-		strcpy(cBuffer1,"Please enter valid category");
+		strcpy(cBuffer1,"Sorry wrong category entered....please enter proper category(providers's UID/all/service name) \n");
 	}
 	else {
 		fprintf(stderr, "INFO: Inside category != ALL..\n");
 		memset(cBuffer1, 0, ((rec_index+1) * sizeof(struct get_list)));
-		strcpy(cBuffer1,"SID  NAME  TYPE  FIELD SESSIONTYPE UID\n");
                 for(i=0;i<rec_index;i++){
 			if((strcmp(cCategory,list[i].iUid)==0) || (strcmp(cCategory,list[i].name)==0)){
 						j = 0;
+				strcpy(cBuffer1,"SID  NAME  TYPE  FIELD SESSIONTYPE UID\n");
 				fprintf(stderr,"INFO: Entering != ALL\n");
                         	do{
                                 	switch(j){
@@ -169,6 +169,8 @@ char* get_svc_list(char *cBuffer){
         	                        j++;
                 	        }while(j <= 6);
 			}
+		else
+			strcpy(cBuffer1,"Sorry wrong category entered....please proper category \n");	
 		}		
 	}
 	fprintf(stderr, "INFO: get_svc_list complete %s\n",cBuffer1);

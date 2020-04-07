@@ -97,8 +97,9 @@ char* load(){
                         }
 
                         printf("Finding symbol : (reg)\n");
-                        strcpy(pBuffer,"REG_SVC:");
-                        svc[i].getname=dlsym(svc[i].pHandle,"getname");
+                        strncpy(pBuffer,"REG_SVC:",8);
+                        //svc[i].getname=dlsym(svc[i].pHandle,"getname");
+			if((svc[i].getname =dlsym(svc[i].pHandle,"getname") )!= NULL){
                         pSvcName=svc[i].getname();
                         if ( svc[i].getname== NULL) {
                                 fprintf(stderr, "ERROR: symbol not found..Skipping..\n");
@@ -106,15 +107,27 @@ char* load(){
                                 }
                         strcat(pBuffer,pSvcName);
                         strcat(pBuffer,",");
-        		svc[i].gettype=dlsym(svc[i].pHandle,"gettype");
+			}
+			else{
+				printf("\n function missed getname ");
+				exit(0);
+			}
+			if((svc[i].gettype =dlsym(svc[i].pHandle,"gettype") )!= NULL){
+        		//svc[i].gettype=dlsym(svc[i].pHandle,"gettype");
 			pSvcType=svc[i].gettype();
 			if ( svc[i].gettype== NULL) {
 				fprintf(stderr, "ERROR: symbol not found..Skipping..\n");
 				continue;
 			}
-		strcat(pBuffer,pSvcType);
-		strcat(pBuffer," , ");
-                        svc[i].getstatus=dlsym(svc[i].pHandle,"getstatus");
+			strcat(pBuffer,pSvcType);
+			strcat(pBuffer," , ");
+			}
+			else{
+				printf("\n function missed gettype");
+				exit(0);
+			}
+			if((svc[i].getstatus =dlsym(svc[i].pHandle,"getstatus")) != NULL){
+                        //svc[i].getstatus=dlsym(svc[i].pHandle,"getstatus");
                         pSvcStatus=svc[i].getstatus();
                                 if ( svc[i].getstatus== NULL) {
                                         fprintf(stderr, "ERROR: symbol not found..Skipping..\n");
@@ -122,7 +135,14 @@ char* load(){
                                 }
                         strcat(pBuffer,pSvcStatus);
 			strcat(pBuffer,",");
-                        svc[i].getfield=dlsym(svc[i].pHandle,"getfield");
+			}
+			else{
+				printf("\n function missed getstatus ");
+				exit(0);
+			}
+
+                        //svc[i].getfield=dlsym(svc[i].pHandle,"getfield");
+			if((svc[i].getfield =dlsym(svc[i].pHandle,"getfield")) != NULL){
                         pField=svc[i].getfield();
 			//printf("field=>%s",pField);
                                 if ( svc[i].getfield== NULL) {
@@ -131,16 +151,27 @@ char* load(){
                                 }
 			strcat(pBuffer,pField);
 			strcat(pBuffer,",");
-                        svc[i].getsessiontype=dlsym(svc[i].pHandle,"getsessiontype");
+			}
+			else{
+				printf("\n function missed getfield ");
+				exit(0);
+			}
+			if((svc[i].getsessiontype =dlsym(svc[i].pHandle,"getsessiontype")) != NULL){
+                        //svc[i].getsessiontype=dlsym(svc[i].pHandle,"getsessiontype");
                         psessiontype=svc[i].getsessiontype();
-			//printf("psessiontype=>%s",psessiontype);
                                 if ( svc[i].getsessiontype== NULL) {
                                         fprintf(stderr, "ERROR: symbol not found..Skipping..\n");
                                         continue;
                                 }
 			strcat(pBuffer,psessiontype);
 			strcat(pBuffer,",");
-                        svc[i].getuid=dlsym(svc[i].pHandle,"getuid");
+			}
+			else{
+				printf("\n function missed getsessiotype ");
+				exit(0);
+			}
+			if((svc[i].getuid =dlsym(svc[i].pHandle,"getuid")) != NULL){
+                        //svc[i].getuid=dlsym(svc[i].pHandle,"getuid");
 			pUid=svc[i].getuid();
 			printf("\ngetuid is %s",pUid);
                                 if ( svc[i].getuid== NULL) {
@@ -148,9 +179,15 @@ char* load(){
                                         continue;
                                 }
                         strcat(pBuffer,pUid);
+			}
+			else{
+				printf("\n function missed getuid");
+				return 0;
+			}
+			
                         printf("pBuffer = > %s\n",pBuffer);
                         handle[j++] = svc[i].pHandle;
-                }
+		}
         }
         printf("INFO: closing directory..\n");
         closedir(pPluginsDir);
