@@ -29,7 +29,7 @@ int reg_usr_validation(char *str)
 			 return 0;
 		 }
 		 else if(rv==3){
-			 printf("\n Incorrect! ,Please enter valid mail id,it must be maximum of 35 characters,re-enter again\n");
+			 printf("\n Incorrect! ,Please enter valid mail id & also check it's length it must be maximum of 35 characters,re-enter again\n");
                          return 0;
 		 }
 		 else if(rv==4){
@@ -156,7 +156,7 @@ void email_validation(char *mail)
 int length_checking(char *cBuffer)
 {
 	int name_len=0,mailid_len=0,i=0,j=0,k=0,z=0,at_count=0,val=0;
-	bool name=false,mailid=false,at_mail=false,com_flag=false;
+	bool name=false,mailid=false,at_mail=false,com_flag=false,mailid1=false;
 	char *cName,*cMailid,*command,*buff,*ret;
 	cName=(char *)malloc(MAX*(sizeof(char)));
         cMailid=(char *)malloc(MAX*(sizeof(char)));
@@ -195,7 +195,8 @@ int length_checking(char *cBuffer)
                         }
                         mailid_len=strlen(cMailid);
                 }
-
+		cMailid[mailid_len]='\0';
+		//printf("\n mailid len =%d",mailid_len);
 		for(k=0;k<strlen(cMailid);k++){
 			if(cMailid[k]=='@'){
 				val=k;
@@ -219,14 +220,15 @@ int length_checking(char *cBuffer)
 
 		if((name_len<13) && (name_len>0))
 			name=true;
-		if((mailid_len<38) && (mailid_len>0))
+		if(isalpha(cMailid[0]) != 0)
+                    mailid1=true;
+
+
+		if((mailid_len<38) && (mailid_len>0) && (mailid1==true))
 			mailid=true;
 
             if(isalpha(cMailid[0]) != 0)
-                    mailid=true;
-            else{
-                    mailid=false;
-            }
+                    mailid1=true;
 
 
 		if((name==true) && (mailid==true) && (at_mail==true) && (com_flag==true))
